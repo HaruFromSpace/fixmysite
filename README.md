@@ -54,7 +54,13 @@ The start page lists checks from the server, so a new one shows up there on its 
 
 ## Deploying
 
-Any host that can run Node and Chromium works. There is no hosted version yet. Set `CHROMIUM_PATH` if Chromium is installed somewhere Playwright doesn't look.
+The repo includes a `Dockerfile` (based on the official Playwright image) and a `render.yaml`, so it runs on Render's free plan:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/HaruFromSpace/fixmysite)
+
+The free plan has 512 MB of memory and sleeps after 15 minutes without visitors, so the first check after a quiet spell is slow. `MAX_RUNNING` is set to 1 there so only one browser runs at a time.
+
+Any other host that runs Docker works too. Set `CHROMIUM_PATH` if you run it outside Docker and Chromium lives somewhere Playwright doesn't look.
 
 ## Next
 

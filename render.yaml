@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: fixmysite
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/rules
+    envVars:
+      # The free plan has 512 MB of memory, enough for one Chromium at a time
+      - key: MAX_RUNNING
+        value: "1"
