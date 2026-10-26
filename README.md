@@ -4,6 +4,8 @@ Paste in a web address and fixmysite tells you what makes the page hard to use f
 
 Most accessibility tools report things like "WCAG 1.4.3 color-contrast". That means nothing to someone running a small online shop. Since June 2025 the European Accessibility Act requires online shops in the EU to be accessible, and the [WebAIM Million 2026](https://webaim.org/projects/million/) report found problems on 95.9% of the top million home pages. Shop owners need answers they can act on.
 
+**Try it: [fixmysite.onrender.com](https://fixmysite.onrender.com)** (free hosting, so the first visit can take up to a minute to wake up)
+
 ![Report for a page with four problems](docs/screenshot.png)
 
 ## What it checks
