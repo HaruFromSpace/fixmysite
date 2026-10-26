@@ -18,7 +18,9 @@ async function checkPage(input) {
         args: ['--disable-dev-shm-usage', '--disable-gpu'],
     });
     try {
-        const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+        // bypassCSP: some sites (YouTube, Google) block injected scripts with a strict
+        // Content Security Policy, which would stop axe-core from loading
+        const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, bypassCSP: true });
         const page = await context.newPage();
 
         // Block redirects or sub-requests into private networks too
@@ -37,7 +39,8 @@ async function checkPage(input) {
 
 // Runs the rules on a page that is already open and builds the report
 async function runChecks(page) {
-    await page.addScriptTag({ content: AXE_SOURCE });
+    // evaluate() instead of a <script> tag, so pages that require Trusted Types still work
+    await page.evaluate(AXE_SOURCE);
 
     const results = await page.evaluate(async (rules) => {
         return window.axe.run(document, {
