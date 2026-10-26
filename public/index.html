@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>fixmysite | Accessibility check in plain language</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>fixmysite</h1>
+            <p class="lead">Check your web page for the accessibility problems that show up most often, and find out how to fix them. No jargon.</p>
+        </header>
+
+        <form id="checkForm">
+            <label for="urlInput">Web address</label>
+            <div class="row">
+                <input id="urlInput" type="text" inputmode="url" autocomplete="url" placeholder="yourshop.com" required>
+                <button type="submit" id="checkBtn">Check</button>
+            </div>
+        </form>
+
+        <p id="status" role="status" aria-live="polite"></p>
+        <section id="report" hidden></section>
+
+        <footer>
+            <p>Checks text contrast, image descriptions, form labels and page language with <a href="https://github.com/dequelabs/axe-core">axe-core</a>. Automated checks catch some problems, not all of them.</p>
+            <p><a href="https://github.com/HaruFromSpace/fixmysite">Source on GitHub</a></p>
+        </footer>
+    </main>
+
+    <template id="issueTemplate">
+        <article class="issue">
+            <h3 class="issue-title"></h3>
+            <p class="issue-count"></p>
+            <dl>
+                <dt>Who it affects</dt><dd class="issue-who"></dd>
+                <dt>What is wrong</dt><dd class="issue-why"></dd>
+                <dt>How to fix it</dt><dd class="issue-fix"></dd>
+            </dl>
+            <div class="compare">
+                <div><span class="tag bad">Before</span><pre class="issue-before"></pre></div>
+                <div><span class="tag good">After</span><pre class="issue-after"></pre></div>
+            </div>
+            <details>
+                <summary>Where on your page</summary>
+                <ul class="issue-examples"></ul>
+            </details>
+        </article>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
