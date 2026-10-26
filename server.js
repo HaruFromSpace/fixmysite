@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const { checkPage } = require('./src/check');
+const { checkPage, RULES } = require('./src/check');
+const { explain } = require('./src/explanations');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,10 @@ let running = 0;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/api/rules', (req, res) => {
+    res.json(RULES.map((id) => ({ id, title: explain(id).title, who: explain(id).who })));
+});
 
 app.post('/api/check', async (req, res) => {
     const url = (req.body && req.body.url || '').trim();

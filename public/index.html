@@ -21,11 +21,19 @@
             </div>
         </form>
 
+        <p class="example-link">Just looking? <button type="button" id="exampleBtn" class="link-button">See an example report</button></p>
+
         <p id="status" role="status" aria-live="polite"></p>
         <section id="report" hidden></section>
 
+        <section id="intro" aria-labelledby="checksHeading">
+            <h2 id="checksHeading">What it checks</h2>
+            <p class="summary">These problems show up on most websites. Each one locks some visitors out.</p>
+            <ul id="ruleList" class="rule-list"></ul>
+        </section>
+
         <footer>
-            <p>Checks text contrast, image descriptions, form labels and page language with <a href="https://github.com/dequelabs/axe-core">axe-core</a>. Automated checks catch some problems, not all of them.</p>
+            <p>The checks use <a href="https://github.com/dequelabs/axe-core">axe-core</a>. Automated checks catch some problems, not all of them.</p>
             <p><a href="https://github.com/HaruFromSpace/fixmysite">Source on GitHub</a></p>
         </footer>
     </main>

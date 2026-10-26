@@ -71,7 +71,7 @@ button {
     border-radius: 8px;
     cursor: pointer;
 }
-button:disabled { opacity: 0.6; cursor: wait; }
+button:not(.link-button):disabled { opacity: 0.6; cursor: wait; }
 
 input:focus-visible, button:focus-visible, summary:focus-visible, a:focus-visible {
     outline: 3px solid var(--accent);
@@ -113,5 +113,33 @@ details { margin-top: 14px; }
 summary { cursor: pointer; font-weight: 600; }
 .issue-examples { padding-left: 20px; }
 .issue-examples li { margin: 6px 0; }
+
+.example-link { margin: 12px 0 0; color: var(--muted); }
+.link-button {
+    padding: 0;
+    font: inherit;
+    font-weight: 400;
+    color: var(--accent);
+    background: none;
+    text-decoration: underline;
+    border-radius: 2px;
+}
+
+.rule-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+}
+.rule-list li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+}
+.rule-list h3 { font-size: 1rem; }
+.rule-list p { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
 
 footer { margin-top: 48px; color: var(--muted); font-size: 0.9rem; }

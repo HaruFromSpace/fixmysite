@@ -4,6 +4,30 @@ const button = document.getElementById('checkBtn');
 const statusEl = document.getElementById('status');
 const report = document.getElementById('report');
 const template = document.getElementById('issueTemplate');
+const intro = document.getElementById('intro');
+const ruleList = document.getElementById('ruleList');
+const exampleBtn = document.getElementById('exampleBtn');
+
+// Cards come from the server, so a new check shows up here automatically
+fetch('/api/rules')
+    .then((res) => res.json())
+    .then((rules) => {
+        for (const rule of rules) {
+            const li = document.createElement('li');
+            const title = document.createElement('h3');
+            const who = document.createElement('p');
+            title.textContent = rule.title;
+            who.textContent = rule.who;
+            li.append(title, who);
+            ruleList.append(li);
+        }
+    })
+    .catch(() => { intro.hidden = true; });
+
+exampleBtn.addEventListener('click', async () => {
+    const res = await fetch('example-report.json');
+    showReport(await res.json(), true);
+});
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -29,7 +53,9 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-function showReport(data) {
+function showReport(data, isExample = false) {
+    report.innerHTML = '';
+    intro.hidden = true;
     const heading = document.createElement('h2');
     const summary = document.createElement('p');
     summary.className = 'summary';
@@ -42,6 +68,7 @@ function showReport(data) {
         const total = data.issues.reduce((n, i) => n + i.count, 0);
         heading.textContent = `${data.issues.length} of ${data.rulesChecked} checks found problems`;
         summary.textContent = `${total} places to fix on ${data.title || data.url}.`;
+        if (isExample) summary.textContent = `Example: a made-up shop page with ${total} problems.`;
         report.append(heading, summary);
         for (const issue of data.issues) report.append(renderIssue(issue));
     }
