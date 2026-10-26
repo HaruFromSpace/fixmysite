@@ -28,25 +28,32 @@ function isPrivateIp(ip) {
     );
 }
 
+// Errors meant to be shown to the visitor as they are
+function userError(message) {
+    const err = new Error(message);
+    err.userFacing = true;
+    return err;
+}
+
 async function checkUrl(input) {
     let url;
     try {
         url = new URL(input.includes('://') ? input : `https://${input}`);
     } catch {
-        throw new Error('That does not look like a web address.');
+        throw userError('That does not look like a web address.');
     }
     if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-        throw new Error('Only http and https addresses can be checked.');
+        throw userError('Only http and https addresses can be checked.');
     }
 
     let addresses;
     try {
         addresses = await dns.lookup(url.hostname, { all: true });
     } catch {
-        throw new Error(`Could not find a website at ${url.hostname}.`);
+        throw userError(`Could not find a website at ${url.hostname}.`);
     }
     if (addresses.some((a) => isPrivateIp(a.address))) {
-        throw new Error('Only public websites can be checked.');
+        throw userError('Only public websites can be checked.');
     }
     return url.toString();
 }

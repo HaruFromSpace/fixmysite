@@ -28,9 +28,12 @@ app.post('/api/check', async (req, res) => {
     try {
         res.json(await checkPage(url));
     } catch (err) {
-        const message = err.message.startsWith('page.goto')
-            ? 'The page did not load. Check the address and try again.'
-            : err.message;
+        console.error(`check failed for ${url}:`, err.message);
+        const message = err.userFacing
+            ? err.message
+            : err.message.startsWith('page.goto')
+                ? 'The page did not load. Check the address and try again.'
+                : 'Something went wrong while checking this page. Try again, or try another page.';
         res.status(400).json({ error: message });
     } finally {
         running--;
