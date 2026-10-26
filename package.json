@@ -5,9 +5,16 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node src/cli.js"
+    "check": "node src/cli.js",
+    "test": "node scripts/test-fixture.js"
   },
-  "keywords": ["accessibility", "a11y", "wcag", "axe-core", "eaa"],
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "axe-core",
+    "eaa"
+  ],
   "author": "Yazan Abu Ruz",
   "license": "MIT",
   "engines": {

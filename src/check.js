@@ -27,33 +27,38 @@ async function checkPage(input) {
         });
 
         await page.goto(url, { waitUntil: 'load', timeout: 20000 });
-        await page.addScriptTag({ content: AXE_SOURCE });
-
-        const results = await page.evaluate(async (rules) => {
-            return window.axe.run(document, {
-                runOnly: { type: 'rule', values: rules },
-                resultTypes: ['violations'],
-            });
-        }, RULES);
-
-        return {
-            url: page.url(),
-            title: await page.title(),
-            checkedAt: new Date().toISOString(),
-            rulesChecked: RULES.length,
-            issues: results.violations.map((v) => ({
-                rule: v.id,
-                ...explain(v.id),
-                count: v.nodes.length,
-                examples: v.nodes.slice(0, 5).map((n) => ({
-                    html: n.html.slice(0, 300),
-                    selector: n.target.join(' '),
-                })),
-            })),
-        };
+        return await runChecks(page);
     } finally {
         await browser.close();
     }
 }
 
-module.exports = { checkPage, RULES };
+// Runs the rules on a page that is already open and builds the report
+async function runChecks(page) {
+    await page.addScriptTag({ content: AXE_SOURCE });
+
+    const results = await page.evaluate(async (rules) => {
+        return window.axe.run(document, {
+            runOnly: { type: 'rule', values: rules },
+            resultTypes: ['violations'],
+        });
+    }, RULES);
+
+    return {
+        url: page.url(),
+        title: await page.title(),
+        checkedAt: new Date().toISOString(),
+        rulesChecked: RULES.length,
+        issues: results.violations.map((v) => ({
+            rule: v.id,
+            ...explain(v.id),
+            count: v.nodes.length,
+            examples: v.nodes.slice(0, 5).map((n) => ({
+                html: n.html.slice(0, 300),
+                selector: n.target.join(' '),
+            })),
+        })),
+    };
+}
+
+module.exports = { checkPage, runChecks, RULES };
