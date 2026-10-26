@@ -14,6 +14,8 @@ async function checkPage(input) {
 
     const browser = await chromium.launch({
         executablePath: process.env.CHROMIUM_PATH || undefined,
+        // Small containers have a tiny /dev/shm, which crashes Chromium
+        args: ['--disable-dev-shm-usage', '--disable-gpu'],
     });
     try {
         const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
