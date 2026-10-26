@@ -43,7 +43,14 @@ npm run check -- yourshop.com
 
 The server opens the page in a headless Chromium with Playwright, injects axe-core, runs only the four rules above and maps each result to a plain-language explanation. It refuses addresses on private networks and localhost, and runs at most two checks at once (`MAX_RUNNING`).
 
-`test/fixture.html` is a small page with all four problems, for trying changes.
+## Adding a check
+
+1. Pick a rule from the [axe-core rule list](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md) and add its id to `RULES` in `src/check.js`.
+2. Write its plain-language explanation in `src/explanations.js`.
+3. Add a broken example of it to `test/fixture.html`.
+4. Run `npm test`. It fails if any rule finds nothing in the fixture, and it rebuilds the example report.
+
+The start page lists checks from the server, so a new one shows up there on its own.
 
 ## Deploying
 
