@@ -47,7 +47,7 @@ The server opens the page in a headless Chromium with Playwright, injects axe-co
 
 ## Deploying
 
-Any host that can run Node and Chromium works. On Render, use `npm install && npx playwright install --with-deps chromium` as the build command and `npm start` as the start command.
+Any host that can run Node and Chromium works. There is no hosted version yet. Set `CHROMIUM_PATH` if Chromium is installed somewhere Playwright doesn't look.
 
 ## Next
 
