@@ -1,0 +1,21 @@
+{
+  "name": "fixmysite",
+  "version": "0.1.0",
+  "description": "Checks a web page for common accessibility problems and explains how to fix them in plain language",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node src/cli.js"
+  },
+  "keywords": ["accessibility", "a11y", "wcag", "axe-core", "eaa"],
+  "author": "Yazan Abu Ruz",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "axe-core": "^4.10.0",
+    "express": "^5.1.0",
+    "playwright": "^1.50.0"
+  }
+}
