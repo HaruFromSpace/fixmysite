@@ -10,12 +10,13 @@ Most accessibility tools report things like "WCAG 1.4.3 color-contrast". That me
 
 ## What it checks
 
-The first version covers the four problems that show up most often:
+It covers five of the problems that show up most often:
 
 - text that is too faint to read against its background
 - images with no description for screen readers
 - form fields with no label
 - pages that don't say which language they are in
+- links that don't say where they go, like an icon-only cart link
 
 The checks come from [axe-core](https://github.com/dequelabs/axe-core). The explanations are my own, in `src/explanations.js`.
 
@@ -43,7 +44,7 @@ npm run check -- yourshop.com
 
 ## How it works
 
-The server opens the page in a headless Chromium with Playwright, injects axe-core, runs only the four rules above and maps each result to a plain-language explanation. It refuses addresses on private networks and localhost, and runs at most two checks at once (`MAX_RUNNING`).
+The server opens the page in a headless Chromium with Playwright, injects axe-core, runs only the rules above and maps each result to a plain-language explanation. It refuses addresses on private networks and localhost, and runs at most two checks at once (`MAX_RUNNING`).
 
 ## Adding a check
 
