@@ -4,6 +4,8 @@ const dns = require('dns').promises;
 const net = require('net');
 
 function isPrivateIp(ip) {
+    // URL.hostname keeps the brackets around IPv6 addresses, e.g. "[::1]"
+    if (ip.startsWith('[') && ip.endsWith(']')) ip = ip.slice(1, -1);
     if (net.isIPv4(ip)) {
         const [a, b] = ip.split('.').map(Number);
         return (
@@ -17,8 +19,21 @@ function isPrivateIp(ip) {
             a >= 224
         );
     }
-    const lower = ip.toLowerCase();
-    if (lower.startsWith('::ffff:')) return isPrivateIp(lower.slice(7));
+    if (!net.isIPv6(ip)) return false;
+    // Write it the short way, so 0:0:0:0:0:0:0:1 becomes ::1
+    let lower;
+    try {
+        lower = new URL(`http://[${ip}]/`).hostname.slice(1, -1);
+    } catch {
+        return true; // e.g. a zone id like fe80::1%eth0. Refuse what we can't read.
+    }
+    // IPv4 inside IPv6. The URL parser turns ::ffff:127.0.0.1 into ::ffff:7f00:1
+    const mapped = lower.match(/^::ffff:([0-9a-f]{1,4}):([0-9a-f]{1,4})$/);
+    if (mapped) {
+        const hi = parseInt(mapped[1], 16);
+        const lo = parseInt(mapped[2], 16);
+        return isPrivateIp([hi >> 8, hi & 255, lo >> 8, lo & 255].join('.'));
+    }
     return (
         lower === '::' ||
         lower === '::1' ||
@@ -48,7 +63,7 @@ async function checkUrl(input) {
 
     let addresses;
     try {
-        addresses = await dns.lookup(url.hostname, { all: true });
+        addresses = await dns.lookup(url.hostname.replace(/^\[(.*)\]$/, '$1'), { all: true });
     } catch {
         throw userError(`Could not find a website at ${url.hostname}.`);
     }
