@@ -1,9 +1,25 @@
 {
   "url": "https://example-shop.test/",
   "title": "Example shop",
-  "checkedAt": "2026-11-09T05:48:34.971Z",
-  "rulesChecked": 5,
+  "checkedAt": "2026-11-09T05:49:35.387Z",
+  "rulesChecked": 6,
   "issues": [
+    {
+      "rule": "button-name",
+      "title": "Some buttons do not say what they do",
+      "who": "Screen reader users hear just \"button\" and have to guess what pressing it will do. Voice control users cannot name it to press it.",
+      "why": "The button has no text inside it, usually because it only shows an icon, like a magnifying glass, a heart or a close cross.",
+      "fix": "Put a short word inside the button. If the design only shows an icon, add an aria-label that says what the button does, and hide the icon from screen readers.",
+      "before": "<button><svg>...</svg></button>",
+      "after": "<button aria-label=\"Add to wishlist\"><svg aria-hidden=\"true\">...</svg></button>",
+      "count": 1,
+      "examples": [
+        {
+          "html": "<button type=\"button\"><svg width=\"16\" height=\"16\"><path d=\"M8 14 2 8a3 3 0 0 1 6-3 3 3 0 0 1 6 3z\"></path></svg></button>",
+          "selector": "button"
+        }
+      ]
+    },
     {
       "rule": "color-contrast",
       "title": "Some text is hard to read",
@@ -48,7 +64,7 @@
       "examples": [
         {
           "html": "<img src=\"data:image/gif;base64,R0lGODlhAQABAAAAACw=\">",
-          "selector": "img:nth-child(4)"
+          "selector": "img:nth-child(5)"
         }
       ]
     },

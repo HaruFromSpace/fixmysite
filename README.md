@@ -10,13 +10,14 @@ Most accessibility tools report things like "WCAG 1.4.3 color-contrast". That me
 
 ## What it checks
 
-It covers five of the problems that show up most often:
+It covers six of the problems that show up most often:
 
 - text that is too faint to read against its background
 - images with no description for screen readers
 - form fields with no label
 - pages that don't say which language they are in
 - links that don't say where they go, like an icon-only cart link
+- buttons that don't say what they do, like an icon-only wishlist button
 
 The checks come from [axe-core](https://github.com/dequelabs/axe-core). The explanations are my own, in `src/explanations.js`.
 

@@ -94,6 +94,18 @@ const CASES = {
             'image link with alt': `<a href="/"><img src="${IMG}" alt="Home"></a>`,
         },
     },
+    'button-name': {
+        bad: {
+            'icon-only button': '<button type="button"><svg width="16" height="16"><circle cx="8" cy="8" r="6"/></svg></button>',
+            'empty button': '<button type="button"></button>',
+            'button with only a space': '<button type="button"> </button>',
+        },
+        good: {
+            'text button': '<button type="button">Add to cart</button>',
+            'icon button with aria-label': '<button type="button" aria-label="Add to wishlist"><svg aria-hidden="true" width="16" height="16"></svg></button>',
+            'input button with value': '<input type="button" value="Search">',
+        },
+    },
 };
 
 function asPage(html) {

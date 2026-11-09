@@ -7,7 +7,7 @@ const AXE_SOURCE = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8
 
 // Problems that show up on most pages (WebAIM Million 2026).
 // More rules can be added here one at a time.
-const RULES = ['color-contrast', 'image-alt', 'label', 'html-has-lang', 'link-name'];
+const RULES = ['color-contrast', 'image-alt', 'label', 'html-has-lang', 'link-name', 'button-name'];
 
 async function checkPage(input) {
     const url = await checkUrl(input);
