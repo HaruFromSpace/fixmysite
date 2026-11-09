@@ -51,9 +51,21 @@ The server opens the page in a headless Chromium with Playwright, injects axe-co
 1. Pick a rule from the [axe-core rule list](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md) and add its id to `RULES` in `src/check.js`.
 2. Write its plain-language explanation in `src/explanations.js`.
 3. Add a broken example of it to `test/fixture.html`.
-4. Run `npm test`. It fails if any rule finds nothing in the fixture, and it rebuilds the example report.
+4. Add a few pages it should flag and a few it should leave alone to `CASES` in `test/unit/checks.test.js`.
+5. Run `npm test`. It fails if any rule finds nothing in the fixture, and it rebuilds the example report.
 
 The start page lists checks from the server, so a new one shows up there on its own.
+
+## Tests
+
+`npm test` runs the fixture check above and then the tests in `test/unit/` with Node's built-in test runner. `npm run test:unit` runs only the second part. They cover:
+
+- each rule on small pages it should flag and pages it should leave alone
+- the private-address guard, including IPv6 and the odd ways people write 127.0.0.1
+- that every rule has a full explanation
+- the API's error messages, which should always be plain sentences
+
+None of them need the internet. If Playwright can't find its browser, point `CHROMIUM_PATH` at a Chromium binary.
 
 ## Deploying
 

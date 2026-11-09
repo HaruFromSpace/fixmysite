@@ -18,7 +18,7 @@ app.get('/api/rules', (req, res) => {
 });
 
 app.post('/api/check', async (req, res) => {
-    const url = (req.body && req.body.url || '').trim();
+    const url = typeof req.body?.url === 'string' ? req.body.url.trim() : '';
     if (!url) return res.status(400).json({ error: 'Enter a web address to check.' });
     if (running >= MAX_RUNNING) {
         return res.status(503).json({ error: 'Busy checking other sites. Try again in a minute.' });
@@ -38,6 +38,14 @@ app.post('/api/check', async (req, res) => {
     } finally {
         running--;
     }
+});
+
+// Anything that slips through (like a broken JSON body) gets a short message
+// instead of Express's default page with a stack trace
+app.use((err, req, res, next) => {
+    console.error(`request failed for ${req.method} ${req.path}:`, err.message);
+    const status = err.status >= 400 && err.status < 500 ? err.status : 500;
+    res.status(status).json({ error: 'Something went wrong with that request. Reload the page and try again.' });
 });
 
 app.listen(PORT, () => {
