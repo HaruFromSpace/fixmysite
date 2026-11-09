@@ -41,6 +41,14 @@ const EXPLANATIONS = {
         before: '<a href="/cart"><svg>...</svg></a>',
         after: '<a href="/cart" aria-label="Shopping cart"><svg aria-hidden="true">...</svg></a>',
     },
+    'button-name': {
+        title: 'Some buttons do not say what they do',
+        who: 'Screen reader users hear just "button" and have to guess what pressing it will do. Voice control users cannot name it to press it.',
+        why: 'The button has no text inside it, usually because it only shows an icon, like a magnifying glass, a heart or a close cross.',
+        fix: 'Put a short word inside the button. If the design only shows an icon, add an aria-label that says what the button does, and hide the icon from screen readers.',
+        before: '<button><svg>...</svg></button>',
+        after: '<button aria-label="Add to wishlist"><svg aria-hidden="true">...</svg></button>',
+    },
 };
 
 function explain(ruleId) {
