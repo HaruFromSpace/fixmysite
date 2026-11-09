@@ -5,9 +5,9 @@ const { explain } = require('./explanations');
 
 const AXE_SOURCE = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
 
-// The four problems that show up on most pages (WebAIM Million 2026).
+// Problems that show up on most pages (WebAIM Million 2026).
 // More rules can be added here one at a time.
-const RULES = ['color-contrast', 'image-alt', 'label', 'html-has-lang'];
+const RULES = ['color-contrast', 'image-alt', 'label', 'html-has-lang', 'link-name'];
 
 async function checkPage(input) {
     const url = await checkUrl(input);

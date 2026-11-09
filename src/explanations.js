@@ -33,6 +33,14 @@ const EXPLANATIONS = {
         before: '<html>',
         after: '<html lang="de">',
     },
+    'link-name': {
+        title: 'Some links do not say where they go',
+        who: 'Screen reader users hear just "link" with no idea where it leads. Voice control users have no word to say to click it.',
+        why: 'The link has no text inside it, often because it only holds an icon, like a cart or a social media logo.',
+        fix: 'Put a few words inside the link. If the design only shows an icon, add an aria-label to the link that says where it goes, and hide the icon itself from screen readers.',
+        before: '<a href="/cart"><svg>...</svg></a>',
+        after: '<a href="/cart" aria-label="Shopping cart"><svg aria-hidden="true">...</svg></a>',
+    },
 };
 
 function explain(ruleId) {
