@@ -106,6 +106,17 @@ const CASES = {
             'input button with value': '<input type="button" value="Search">',
         },
     },
+    'document-title': {
+        bad: {
+            'no title': '<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body><h1>Shop</h1></body></html>',
+            'empty title': '<!doctype html><html lang="en"><head><meta charset="utf-8"><title></title></head><body><h1>Shop</h1></body></html>',
+            'title with only spaces': '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>   </title></head><body><h1>Shop</h1></body></html>',
+        },
+        good: {
+            'named page': '<h1>Shop</h1>',
+            'page name and shop name': '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Red sneakers | Lina\'s Shoes</title></head><body><h1>Red sneakers</h1></body></html>',
+        },
+    },
 };
 
 function asPage(html) {
@@ -169,7 +180,7 @@ test('example markup is never longer than 300 characters', async () => {
 });
 
 test('only the listed rules run, not all of axe-core', async () => {
-    // A button with no text breaks axe's button-name rule, which we do not run
+    // A marquee breaks axe's marquee rule, which we do not run
     const report = await check(page('<button></button><marquee>old</marquee>'));
     for (const issue of report.issues) assert.ok(RULES.includes(issue.rule), issue.rule);
 });
