@@ -1,8 +1,8 @@
 {
   "url": "https://example-shop.test/",
   "title": "Example shop",
-  "checkedAt": "2026-11-09T05:49:35.387Z",
-  "rulesChecked": 6,
+  "checkedAt": "2026-11-16T05:50:07.938Z",
+  "rulesChecked": 7,
   "issues": [
     {
       "rule": "button-name",
@@ -33,6 +33,22 @@
         {
           "html": "<p style=\"color:#aaa;background:#fff\">Free shipping over 50 euros</p>",
           "selector": "p"
+        }
+      ]
+    },
+    {
+      "rule": "document-title",
+      "title": "The page has no name",
+      "who": "Screen reader users hear the page name first when it opens, so without one they cannot tell where they landed. Anyone with lots of tabs open sees a blank tab, or just the web address, and has to click through to find your shop again.",
+      "why": "The page is missing its title, the short name that shows on the browser tab, in bookmarks and in search results.",
+      "fix": "Add a title inside the head of the page that names the page first and the shop second. Most shop builders have a \"page title\" or \"SEO title\" box for this.",
+      "before": "<head>\n  <meta charset=\"utf-8\">\n</head>",
+      "after": "<head>\n  <meta charset=\"utf-8\">\n  <title>Red sneakers | Lina's Shoes</title>\n</head>",
+      "count": 1,
+      "examples": [
+        {
+          "html": "<html>",
+          "selector": "html"
         }
       ]
     },

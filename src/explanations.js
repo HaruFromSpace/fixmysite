@@ -49,6 +49,14 @@ const EXPLANATIONS = {
         before: '<button><svg>...</svg></button>',
         after: '<button aria-label="Add to wishlist"><svg aria-hidden="true">...</svg></button>',
     },
+    'document-title': {
+        title: 'The page has no name',
+        who: 'Screen reader users hear the page name first when it opens, so without one they cannot tell where they landed. Anyone with lots of tabs open sees a blank tab, or just the web address, and has to click through to find your shop again.',
+        why: 'The page is missing its title, the short name that shows on the browser tab, in bookmarks and in search results.',
+        fix: 'Add a title inside the head of the page that names the page first and the shop second. Most shop builders have a "page title" or "SEO title" box for this.',
+        before: '<head>\n  <meta charset="utf-8">\n</head>',
+        after: '<head>\n  <meta charset="utf-8">\n  <title>Red sneakers | Lina\'s Shoes</title>\n</head>',
+    },
 };
 
 function explain(ruleId) {
