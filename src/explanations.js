@@ -56,6 +56,13 @@ const EXPLANATIONS = {
         fix: 'Add a title inside the head of the page that names the page first and the shop second. Most shop builders have a "page title" or "SEO title" box for this.',
         before: '<head>\n  <meta charset="utf-8">\n</head>',
         after: '<head>\n  <meta charset="utf-8">\n  <title>Red sneakers | Lina\'s Shoes</title>\n</head>',
+    },    'heading-order': {
+        title: 'Headings skip a level',
+        who: 'Screen reader users often jump from heading to heading to get a quick outline of the page. When a level is skipped, it sounds like a section is missing, and they cannot tell which parts belong together.',
+        why: 'A heading jumps more than one level down from the one before it, for example from the main page heading straight to a third-level heading. This often happens when a heading size is picked for how it looks rather than where it sits on the page.',
+        fix: 'Go down one level at a time: the page heading first, then second-level headings for each section, then third-level ones inside those. If you want a heading to look smaller, change its size in the theme settings instead of picking a lower level.',
+        before: '<h1>Summer sale</h1>\n<h3>New arrivals</h3>',
+        after: '<h1>Summer sale</h1>\n<h2>New arrivals</h2>',
     },
 };
 

@@ -116,6 +116,16 @@ const CASES = {
             'named page': '<h1>Shop</h1>',
             'page name and shop name': '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Red sneakers | Lina\'s Shoes</title></head><body><h1>Red sneakers</h1></body></html>',
         },
+    },    'heading-order': {
+        bad: {
+            'page heading straight to a third level': '<h1>Summer sale</h1><h3>New arrivals</h3>',
+            'second level straight to a fourth level': '<h1>Shop</h1><h2>Shoes</h2><h4>Sneakers</h4>',
+        },
+        good: {
+            'one level at a time': '<h1>Shop</h1><h2>Shoes</h2><h3>Sneakers</h3>',
+            'going back up several levels': '<h1>Shop</h1><h2>Shoes</h2><h3>Sneakers</h3><h2>Bags</h2>',
+            'only a page heading': '<h1>Summer sale</h1>',
+        },
     },
 };
 

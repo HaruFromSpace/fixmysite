@@ -1,8 +1,8 @@
 {
   "url": "https://example-shop.test/",
   "title": "Example shop",
-  "checkedAt": "2026-11-16T05:50:07.938Z",
-  "rulesChecked": 7,
+  "checkedAt": "2026-11-23T05:48:31.867Z",
+  "rulesChecked": 8,
   "issues": [
     {
       "rule": "button-name",
@@ -53,6 +53,22 @@
       ]
     },
     {
+      "rule": "heading-order",
+      "title": "Headings skip a level",
+      "who": "Screen reader users often jump from heading to heading to get a quick outline of the page. When a level is skipped, it sounds like a section is missing, and they cannot tell which parts belong together.",
+      "why": "A heading jumps more than one level down from the one before it, for example from the main page heading straight to a third-level heading. This often happens when a heading size is picked for how it looks rather than where it sits on the page.",
+      "fix": "Go down one level at a time: the page heading first, then second-level headings for each section, then third-level ones inside those. If you want a heading to look smaller, change its size in the theme settings instead of picking a lower level.",
+      "before": "<h1>Summer sale</h1>\n<h3>New arrivals</h3>",
+      "after": "<h1>Summer sale</h1>\n<h2>New arrivals</h2>",
+      "count": 1,
+      "examples": [
+        {
+          "html": "<h3>New arrivals</h3>",
+          "selector": "h3"
+        }
+      ]
+    },
+    {
       "rule": "html-has-lang",
       "title": "The page does not say which language it is in",
       "who": "Screen readers pick the wrong voice and pronounce every word badly.",
@@ -80,7 +96,7 @@
       "examples": [
         {
           "html": "<img src=\"data:image/gif;base64,R0lGODlhAQABAAAAACw=\">",
-          "selector": "img:nth-child(5)"
+          "selector": "img:nth-child(6)"
         }
       ]
     },
